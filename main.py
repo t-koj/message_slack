@@ -5,21 +5,11 @@ from slack_sdk import WebClient
 from slack_sdk.web import SlackResponse
 from simple_parsing import parse_known_args, field
 from dataclasses import dataclass
+from src.post_message import post_message
 
 @dataclass
 class Arguments:
     message: str = field(positional=True)
-
-async def post_message(message: str) -> SlackResponse:
-    token = os.getenv("SLACKBOT_TOKEN")
-    if not token:
-        raise ValueError("Environment SLACKBOT_TOKEN is not set.")
-    channel = os.getenv("SLACKBOT_CHANNEL")
-    if not channel:
-        raise ValueError("Environment SLACKBOT_CHANNEL is not set.")
-    client = WebClient(token=token)
-    client.async_mode = True
-    return client.chat_postMessage(channel=channel, text=message)
 
 def _print_usage():
     print("Usage: python main.py <message>")

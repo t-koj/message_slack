@@ -1,1 +1,1 @@
-from src import post_message
+from .src import post_message
