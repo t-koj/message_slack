@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-"$(dirname "$0")/.venv/bin/python" main.py "$@"
+"$(dirname "$0")/.venv/bin/python" "$(dirname "$0")/main.py" "$@"
