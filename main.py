@@ -13,18 +13,16 @@ def _print_usage():
     print("Usage: python main.py <message>")
 
 async def _main(args: Arguments):
+    from dotenv import load_dotenv
+    load_dotenv()
     message = args.message
     if not message:
         _print_usage()
         sys.exit(1)
     response = await post_message(message)
-    if response["ok"]:
-        print("Message sent successfully.")
-    else:
-        print(f"Failed to send message: {response['error']}")
+    if not response["ok"]:
+        raise Exception(f"Failed to send message: {response['error']}")
 
 if __name__ == "__main__":
-    from dotenv import load_dotenv
-    load_dotenv()
-    args = parse_known_args(Arguments)
+    args, _ = parse_known_args(Arguments)
     asyncio.run(_main(args))
