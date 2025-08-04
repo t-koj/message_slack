@@ -1,8 +1,6 @@
 import sys
 import os
 import asyncio
-from slack_sdk import WebClient
-from slack_sdk.web import SlackResponse
 from simple_parsing import parse_known_args, field
 from dataclasses import dataclass
 from src.post_message import post_message
@@ -26,5 +24,7 @@ async def _main(args: Arguments):
         print(f"Failed to send message: {response['error']}")
 
 if __name__ == "__main__":
+    from dotenv import load_dotenv
+    load_dotenv()
     args = parse_known_args(Arguments)
     asyncio.run(_main(args))
